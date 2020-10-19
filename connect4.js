@@ -10,6 +10,38 @@ let connectBoard = [
 ];
 let gameState = {'turns' : -1, 'over' : false, 'p1win' : false, 'p2win' : false};
 
+function swapTurn()
+{
+    if(curPlayer == 1)
+    {
+        curPlayer = 2;
+    }
+    else
+    {
+        curPlayer = 1;
+    }
+}
+
+function dropPiece(player, column)
+{
+    if(column > 6 || column < 0)
+    {
+        return false;
+    }
+    else
+    {
+        for(let i = 0; i < 6; i++)
+        {
+            if(connectBoard[column][i] == ' ')
+            {
+                connectBoard[column][i] = player;
+                //checkWin() when implemented
+                return true;
+            }
+        }
+        return false;
+    }
+}
 
 function updateBoard()
 {
