@@ -7,12 +7,14 @@
     <script src="connect4.js"></script>
     
     <title>Connect 4</title>
+    <h1>Connect 4</h1>
+    <div>By Zach Alleman<br>For EECS 368 at KU</div><br>
 </head>
 <body onload="setGame()">
     <table id="board">
     </table>
     <br>
-    <div id="turn"></div>
+    <div id="turn"></div><br>
     <div id="inputField">
         <select id="input">
             <option value="1">1</option>
@@ -24,8 +26,8 @@
             <option value="7">7</option>
         </select>
         <button onclick="playerTurn()">Place Piece</button><br><br>
-        <button onclick="resetGame()">Reset Game</button>
     </div>
+    <button onclick="resetGame()">Reset Game</button>
 </body>
 </center>
 </html>

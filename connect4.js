@@ -8,7 +8,7 @@ let connectBoard = [
     [' ', ' ', ' ',' ',' ',' '],
     [' ', ' ', ' ',' ',' ',' ']
 ];
-let gameState = {'turns' : -1, 'over' : false, 'p1win' : false, 'p2win' : false};
+let gameState = {'turns' : -1, 'over' : false};
 
 function swapTurn()
 {
@@ -22,7 +22,7 @@ function swapTurn()
     }
 }
 
-function dropPiece(player, column)
+function dropPiece(piece, column)
 {
     if(column > 6 || column < 0)
     {
@@ -34,12 +34,134 @@ function dropPiece(player, column)
         {
             if(connectBoard[column][i] == ' ')
             {
-                connectBoard[column][i] = player;
-                //checkWin() when implemented
+                connectBoard[column][i] = piece;
+                checkWin(piece, column, i);
                 return true;
             }
         }
         return false;
+    }
+}
+
+function horizontalCheck(piece, column, row)
+{
+    let numInRow = 1;
+    for(let i = column - 1; i >= 0; i--)
+    {
+        if(connectBoard[i][row] != piece)
+        {
+            break;
+        }
+        numInRow++;
+    }
+    for(let i = column + 1; i < 7; i++)
+    {
+        if(connectBoard[i][row] != piece)
+        {
+            break;
+        }
+        numInRow++;
+    }
+    if(numInRow >= 4)
+    {
+        gameState.over = true;
+    }
+}
+
+function verticalCheck(piece, column, row)
+{
+    numInRow = 1;
+    for(let i = row - 1; i >= 0; i--)
+    {
+        if(connectBoard[column][i] != piece)
+        {
+           break; 
+        }
+        numInRow++;
+    }
+    for(let i = row + 1; i < 6; i++)
+    {
+        if(connectBoard[column][i] != piece)
+        {
+            break;
+        }
+        numInRow++;
+    }
+    if(numInRow >= 4)
+    {
+        gameState.over = true;
+    }
+}
+
+function diagUpLeftCheck(piece, column, row)
+{
+    numInRow = 1;
+    let counter = 1;
+    while((column + counter < 7) && (row - counter >= 0))
+    {
+        if(connectBoard[column + counter][row - counter] != piece)
+        {
+            break;
+        }
+        numInRow++;
+        counter++;
+    }
+    counter = 1;
+    while((column - counter >= 0) && (row + counter < 6))
+    {
+        if(connectBoard[column - counter][row + counter] != piece)
+        {
+            break;
+        }
+        numInRow++;
+        counter++;
+    }
+    if(numInRow >= 4)
+    {
+        gameState.over = true;
+    }
+}
+
+function diagUpRightCheck(piece, column, row)
+{
+    numInRow = 1;
+    counter = 1;
+    while((column - counter >= 0) && (row - counter >= 0))
+    {
+        if(connectBoard[column - counter][row - counter] != piece)
+        {
+            break;
+        }
+        numInRow++;
+        counter++;
+    }
+    counter = 1;
+    while((column + counter < 7) && (row + counter < 6))
+    {
+        if(connectBoard[column + counter][row + counter] != piece)
+        {
+            break;
+        }
+        numInRow++;
+        counter++;
+    }
+    if(numInRow >= 4)
+    {
+        gameState.over = true;
+    }
+}
+
+let checks = [horizontalCheck, verticalCheck, diagUpLeftCheck, diagUpRightCheck];
+
+function checkWin(piece, column, row)
+{
+    for(let i = 0; i < 4; i++)
+    {
+        checks[i](piece, column, row);
+        if(gameState.over)
+        {
+            return;
+        }
     }
 }
 
@@ -53,8 +175,16 @@ function playerTurn()
         piecePlaced = dropPiece(curPlayer, response);
         if(piecePlaced)
         {
-            swapTurn();
-            document.getElementById("turn").innerHTML = "Player " + curPlayer + ", your turn!";
+            if(gameState.over)
+            {
+                document.getElementById("turn").innerHTML = "Player " + curPlayer + ", you win!";
+                document.getElementById("inputField").style.display = "none";
+            }
+            else
+            {
+                swapTurn();
+                document.getElementById("turn").innerHTML = "Player " + curPlayer + ", your turn!";
+            }
         }
         updateBoard();
     }
@@ -107,4 +237,5 @@ function resetGame()
     gameState = {'turns' : -1, 'over' : false, 'p1win' : false, 'p2win' : false};
     updateBoard();
     document.getElementById("turn").innerHTML = "Player " + curPlayer + ", your turn!";
+    document.getElementById("inputField").style.display = "block";
 }
