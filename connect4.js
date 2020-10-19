@@ -1,12 +1,36 @@
+let curPlayer = 1;
+let connectBoard = [
+    [' ', ' ', ' ',' ',' ',' '],
+    [' ', ' ', ' ',' ',' ',' '],
+    [' ', ' ', ' ',' ',' ',' '],
+    [' ', ' ', ' ',' ',' ',' '],
+    [' ', ' ', ' ',' ',' ',' '],
+    [' ', ' ', ' ',' ',' ',' '],
+    [' ', ' ', ' ',' ',' ',' ']
+];
+let gameState = {'turns' : -1, 'over' : false, 'p1win' : false, 'p2win' : false};
+
+
 function updateBoard()
 {
     let tableString = "";
-    for(let i = 0; i < 6; i++)
+    for(let i = 5; i >= 0; i--)
     {
         tableString += "<tr>";
-        for(let i = 0; i < 7; i++)
+        for(let j = 0; j < 7; j++)
         {
-            tableString += "<td></td>";
+            if(connectBoard[j][i] == "1")
+            {
+                tableString += "<td class=player1>O</td>";
+            }
+            else if(connectBoard[j][i] == "2")
+            {
+                tableString += "<td class=player2>O</td>";
+            }
+            else
+            {
+                tableString += "<td></td>";
+            }
         }
         tableString += "</tr>";
     }
