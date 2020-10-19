@@ -43,6 +43,23 @@ function dropPiece(player, column)
     }
 }
 
+function playerTurn()
+{
+    if(!gameState.over)
+    {
+        let piecePlaced = false;
+        let response = document.getElementById("input").value;
+        response = Number(response) - 1;
+        piecePlaced = dropPiece(curPlayer, response);
+        if(piecePlaced)
+        {
+            swapTurn();
+            document.getElementById("turn").innerHTML = "Player " + curPlayer + ", your turn!";
+        }
+        updateBoard();
+    }
+}
+
 function updateBoard()
 {
     let tableString = "";
@@ -72,4 +89,5 @@ function updateBoard()
 function setGame()
 {
     updateBoard();
+    document.getElementById("turn").innerHTML = "Player " + curPlayer + ", your turn!";
 }
