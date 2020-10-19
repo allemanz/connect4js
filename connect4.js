@@ -91,3 +91,20 @@ function setGame()
     updateBoard();
     document.getElementById("turn").innerHTML = "Player " + curPlayer + ", your turn!";
 }
+
+function resetGame()
+{
+    curPlayer = 1;
+    connectBoard = [
+    [' ', ' ', ' ',' ',' ',' '],
+    [' ', ' ', ' ',' ',' ',' '],
+    [' ', ' ', ' ',' ',' ',' '],
+    [' ', ' ', ' ',' ',' ',' '],
+    [' ', ' ', ' ',' ',' ',' '],
+    [' ', ' ', ' ',' ',' ',' '],
+    [' ', ' ', ' ',' ',' ',' ']
+    ];
+    gameState = {'turns' : -1, 'over' : false, 'p1win' : false, 'p2win' : false};
+    updateBoard();
+    document.getElementById("turn").innerHTML = "Player " + curPlayer + ", your turn!";
+}
