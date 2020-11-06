@@ -183,7 +183,14 @@ function playerTurn()
             else
             {
                 swapTurn();
-                document.getElementById("turn").innerHTML = "Player " + curPlayer + ", your turn!";
+                if(curplayer == 1)
+                {
+                    document.getElementById("turn").innerHTML = "Player 1 (Red), your turn!";
+                }
+                else
+                {
+                    document.getElementById("turn").innerHTML = "Player 2 (Blue), your turn!";
+                }
             }
         }
         updateBoard();
@@ -219,7 +226,7 @@ function updateBoard()
 function setGame()
 {
     updateBoard();
-    document.getElementById("turn").innerHTML = "Player " + curPlayer + ", your turn!";
+    document.getElementById("turn").innerHTML = "Player 1 (Red), your turn!";
 }
 
 function resetGame()
@@ -236,6 +243,6 @@ function resetGame()
     ];
     gameState = {'turns' : -1, 'over' : false, 'p1win' : false, 'p2win' : false};
     updateBoard();
-    document.getElementById("turn").innerHTML = "Player " + curPlayer + ", your turn!";
+    document.getElementById("turn").innerHTML = "Player 1 (Red), your turn!";
     document.getElementById("inputField").style.display = "block";
 }
