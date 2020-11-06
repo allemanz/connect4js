@@ -177,7 +177,14 @@ function playerTurn()
         {
             if(gameState.over)
             {
-                document.getElementById("turn").innerHTML = "Player " + curPlayer + ", you win!";
+                if(curPlayer == 1)
+                {
+                    document.getElementById("turn").innerHTML = "Player 1 (Red), you win!";
+                }
+                else
+                {
+                    document.getElementById("turn").innerHTML = "Player 2 (Blue), you win!";
+                }
                 document.getElementById("inputField").style.display = "none";
             }
             else
