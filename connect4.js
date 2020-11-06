@@ -183,7 +183,7 @@ function playerTurn()
             else
             {
                 swapTurn();
-                if(curplayer == 1)
+                if(curPlayer == 1)
                 {
                     document.getElementById("turn").innerHTML = "Player 1 (Red), your turn!";
                 }
